@@ -1,0 +1,19 @@
+{
+    "name": "that-chris-r/docs",
+    "description": "A simple documentation system built with twitter bootstrap",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christopher Rolfe",
+            "email": "christopher.rolfe198@gmail.com"
+        }
+    ],
+	"autoload": {
+		"psr-4": {
+			"ThatChrisR\\TechDoc\\" : "lib/"
+		}
+	},
+    "require": {
+
+    }
+}
