@@ -6,29 +6,10 @@ use Michelf\Markdown;
 
 class FilesystemDocumentationLoader implements DocumentationLoaderInterface
 {
-	const ROUTES_FILE = '/app/routes.php';
-	
-	protected static $projects;
-	
-	public function __construct(DocumentationLoaderInterface $documentation_loader)
+	public static function four_oh_four()
 	{
-		$this->documentation_loader = $documentation_loader;
-	}
-	
-	public static function add_routes(array $projects)
-	{
-		// checks if there are existing routes to allow multiple routes files
-		if (is_array(static::$projects)) {
-			$projects = array_merge($projects, static::$projects);
-		}
-		
-		static::$projects = $projects;
-	}
-	
-	public static function 404()
-	{
-		$404 = file_get_contents('../app/layouts/404.md');
-		echo Markdown::defaultTransform($404);
+		$four_oh_four = file_get_contents('../app/layouts/404.md');
+		echo Markdown::defaultTransform($four_oh_four);
 	}
 	
 	public function load($project_details)
@@ -50,7 +31,7 @@ class FilesystemDocumentationLoader implements DocumentationLoaderInterface
 			echo Markdown::defaultTransform($file);
 		} else {
 			// redirect to a 404
-			self::404();
+			self::four_oh_four();
 		}	
 	}
 }
