@@ -6,25 +6,6 @@ use Michelf\Markdown;
 
 class FilesystemDocumentationLoader implements DocumentationLoaderInterface
 {
-	const ROUTES_FILE = '/app/routes.php';
-	
-	protected static $projects;
-	
-	public function __construct(DocumentationLoaderInterface $documentation_loader)
-	{
-		$this->documentation_loader = $documentation_loader;
-	}
-	
-	public static function add_routes(array $projects)
-	{
-		// checks if there are existing routes to allow multiple routes files
-		if (is_array(static::$projects)) {
-			$projects = array_merge($projects, static::$projects);
-		}
-		
-		static::$projects = $projects;
-	}
-	
 	public static function 404()
 	{
 		$404 = file_get_contents('../app/layouts/404.md');
