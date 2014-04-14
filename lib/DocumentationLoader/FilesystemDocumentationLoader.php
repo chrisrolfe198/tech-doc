@@ -19,8 +19,9 @@ class FilesystemDocumentationLoader implements DocumentationLoaderInterface
 		$project = $project_details['name'];
 		$version = $project_details['version'];
 		$lang = $project_details['lang'];
+		$file = $project_details['file'];
 		
-		if ($file = file_get_contents("../docs/$project/$version/$lang/test.md")) {
+		if ($file = file_get_contents("../docs/$project/$version/$lang/$file.md")) {
 			echo Markdown::defaultTransform($file);
 		} else {
 			// redirect to a 404
