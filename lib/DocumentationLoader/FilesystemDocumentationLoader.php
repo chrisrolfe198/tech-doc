@@ -21,9 +21,10 @@ class FilesystemDocumentationLoader implements DocumentationLoaderInterface
 		$lang = $project_details['lang'];
 		
 		if ($file = file_get_contents("../docs/$project/$version/$lang/test.md")) {
-			var_dump($file);
+			echo Markdown::defaultTransform($file);
 		} else {
-			var_dump($file);
+			// redirect to a 404
+			return false;
 		}	
 	}
 }

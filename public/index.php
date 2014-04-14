@@ -2,6 +2,7 @@
 
 use ThatChrisR\TechDocs\DocumentationLoader\FilesystemDocumentationLoader;
 
+require '../vendor/autoload.php';
 require '../lib/DocumentationLoader/DocumentationLoaderInterface.php';
 require '../lib/DocumentationLoader/FilesystemDocumentationLoader.php';
 
