@@ -20,10 +20,10 @@ class FilesystemDocumentationLoader implements DocumentationLoaderInterface
 		$version = $project_details['version'];
 		$lang = $project_details['lang'];
 		
-		if ($file = file_get_contents("/../docs/$project/$version/$lang/test.md")) {
+		if ($file = file_get_contents("../docs/$project/$version/$lang/test.md")) {
 			var_dump($file);
 		} else {
-			echo 'Error';
+			var_dump($file);
 		}	
 	}
 }
