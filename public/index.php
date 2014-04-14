@@ -8,6 +8,8 @@ require '../lib/DocumentationLoader/FilesystemDocumentationLoader.php';
 
 $file = new FilesystemDocumentationLoader();
 
-$query_params = explode($_GET, '/');
+$query_params = explode('/', $_GET);
+
+var_dump($query_params);
 
 $file->load(array('name' => $query_params[0], 'version' => $query_params[1], 'lang' => $query_params[3]));
