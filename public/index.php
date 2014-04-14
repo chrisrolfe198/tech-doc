@@ -8,4 +8,6 @@ require '../lib/DocumentationLoader/FilesystemDocumentationLoader.php';
 
 $file = new FilesystemDocumentationLoader();
 
-$file->load(array('name' => 'techdocs', 'version' => 1, 'lang' => 'en'));
+$query_params = explode($_GET, '/');
+
+$file->load(array('name' => $query_params[0], 'version' => $query_params[1], 'lang' => $query_params[3]));
