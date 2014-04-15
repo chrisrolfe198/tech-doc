@@ -16,7 +16,7 @@ class Router
 		$this->documentation_loader = $documentation_loader;
 	}
 	
-	public static add_routes(array $projects)
+	public static function add_routes(array $projects)
 	{
 		// checks if there are existing routes to allow multiple routes files
 		if (is_array(static::$projects)) {

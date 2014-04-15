@@ -10,10 +10,10 @@
     ],
 	"autoload": {
 		"psr-4": {
-			"ThatChrisR\\TechDoc\\" : "lib/"
+			"ThatChrisR\\TechDocs\\" : "lib/"
 		}
 	},
     "require": {
-		"michelf/php-markdown": "1.4.*@dev"
+			"michelf/php-markdown": "1.4.*@dev"
     }
 }
