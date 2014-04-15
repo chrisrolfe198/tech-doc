@@ -31,7 +31,7 @@ class Router
 		$query_params = $this->format_query_params($query_params);
 		// high level stuff here
 		// check the route params project item matches a known project
-		if ($this->is_a_valid_project($query_params['project'])) {
+		if ($this->is_a_valid_project($query_params['name'])) {
 			// the project exists lets try and load it using the defined implementation
 			$this->documentation_loader->load($query_params);
 		}
