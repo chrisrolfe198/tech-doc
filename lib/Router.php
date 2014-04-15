@@ -28,6 +28,7 @@ class Router
 	
 	public function load_route($query_params)
 	{
+		$query_params = $this->format_query_params($query_params);
 		// high level stuff here
 		// check the route params project item matches a known project
 		if ($this->is_a_valid_project($query_params['project'])) {
@@ -45,5 +46,18 @@ class Router
 			}
 		}
 		return false;
+	}
+	
+	private function format_query_params($params)
+	{
+		// this should read in config somewhere
+		$query_params = array();
+		
+		$query_params['name'] = $params[0];
+		$query_params['version'] = $params[1];
+		$query_params['lang'] = $params[2];
+		$query_params['file'] = $params[3];
+		
+		return $query_params;
 	}
 }
