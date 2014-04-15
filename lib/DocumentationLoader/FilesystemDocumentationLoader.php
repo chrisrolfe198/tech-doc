@@ -6,6 +6,7 @@ use Michelf\Markdown;
 
 class FilesystemDocumentationLoader implements DocumentationLoaderInterface
 {
+
 	public static function four_oh_four()
 	{
 		$four_oh_four = file_get_contents('../app/layouts/404.md');
