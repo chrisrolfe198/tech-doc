@@ -5,7 +5,7 @@ use ThatChrisR\TechDocs\Router;
 Router::add_routes(
 	array(
 		array(
-			'project' => 'TechDocs',
+			'name' => 'TechDocs',
 			'versions' => true,
 			'lang' => array('en', 'de')
 		)
