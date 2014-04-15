@@ -4,11 +4,11 @@ use ThatChrisR\TechDocs\DocumentationLoader\FilesystemDocumentationLoader;
 use ThatChrisR\TechDocs\Router;
 
 require '../vendor/autoload.php';
-require '../lib/DocumentationLoader/DocumentationLoaderInterface.php';
-require '../lib/DocumentationLoader/FilesystemDocumentationLoader.php';
 
+// satisfy the dependencies for the router
 $file = new FilesystemDocumentationLoader();
-
-$query_params = explode('/', $_GET['vars']);
-
 $router = new Router($file);
+
+// load in some documentation
+$query_params = explode('/', $_GET['vars']);
+$router->load_route($query_params);
