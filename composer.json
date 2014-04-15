@@ -11,7 +11,8 @@
 	"autoload": {
 		"psr-4": {
 			"ThatChrisR\\TechDocs\\" : "lib/"
-		}
+		},
+		"files" : ["app/config.php", "app/Routes.php"]
 	},
     "require": {
 			"michelf/php-markdown": "1.4.*@dev"
