@@ -1,11 +1,13 @@
 <?php
 
+use ThatChrisR\TechDocs\Router;
+
 Router::add_routes(
-	[
-		[
+	array(
+		array(
 			'project' => 'TechDocs',
 			'versions' => true,
-			'lang' => ['en', 'de']
-		]
-	]
-)
+			'lang' => array('en', 'de')
+		)
+	)
+);
