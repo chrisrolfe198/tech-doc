@@ -36,16 +36,17 @@ class Router
 		// Finally check if we match a page inside a project
 		if (isset($query_params['name']) && $this->is_a_valid_project($query_params['name'])) {
 			// the project exists lets try and load it using the defined implementation
-			$this->documentation_loader->load($query_params);
+			return $this->documentation_loader->load($query_params);
 		}
 		// redirect to 404 page
-		FilesystemDocumentationLoader::four_oh_four();	
+		return FilesystemDocumentationLoader::four_oh_four();	
 	}
 	
 	private function is_a_valid_project($project_name)
 	{
 		foreach (static::$projects as $project) {
-			if ($project_name === $project['name']) {
+			// Force both to be lower case
+			if (strtolower($project_name) === strtolower($project['name'])) {
 				return true;
 			 }
 		}
