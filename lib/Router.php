@@ -3,6 +3,7 @@
 namespace ThatChrisR\TechDocs;
 
 use ThatChrisR\TechDocs\DocumentationLoader\DocumentationLoaderInterface;
+use ThatChrisR\TechDocs\DocumentationLoader\FilesystemDocumentationLoader;
 
 class Router
 {
@@ -28,14 +29,17 @@ class Router
 	
 	public function load_route($query_params)
 	{
+		// Format the parameters passed in
 		$query_params = $this->format_query_params($query_params);
-		// high level stuff here
-		// check the route params project item matches a known project
-		if ($this->is_a_valid_project($query_params['name'])) {
+		// Check if we are on the homepage
+		// Check if we are on a project landing page
+		// Finally check if we match a page inside a project
+		if (isset($query_params['name']) && $this->is_a_valid_project($query_params['name'])) {
 			// the project exists lets try and load it using the defined implementation
 			$this->documentation_loader->load($query_params);
 		}
 		// redirect to 404 page
+		FilesystemDocumentationLoader::four_oh_four();	
 	}
 	
 	private function is_a_valid_project($project_name)
@@ -52,11 +56,13 @@ class Router
 	{
 		// this should read in config somewhere
 		$query_params = array();
-		
-		$query_params['name'] = $params[0];
-		$query_params['version'] = $params[1];
-		$query_params['lang'] = $params[2];
-		$query_params['file'] = $params[3];
+
+		if (!count($query_params) < 4) {
+			$query_params['name'] = $params[0];
+			$query_params['version'] = $params[1];
+			$query_params['lang'] = $params[2];
+			$query_params['file'] = $params[3];
+		}
 		
 		return $query_params;
 	}
