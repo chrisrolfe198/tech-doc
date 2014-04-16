@@ -4,6 +4,7 @@ namespace ThatChrisR\TechDocs;
 
 use ThatChrisR\TechDocs\DocumentationLoader\DocumentationLoaderInterface;
 use ThatChrisR\TechDocs\DocumentationLoader\FilesystemDocumentationLoader;
+use ThatChrisR\TechDocs\Renderer\Renderer;
 
 class Router
 {
@@ -32,6 +33,10 @@ class Router
 		// Format the parameters passed in
 		$query_params = $this->format_query_params($query_params);
 		// Check if we are on the homepage
+		if (empty($query_params)) {
+			// We have no parameters
+			return Renderer::load_homepage();
+		}
 		// Check if we are on a project landing page
 		// Finally check if we match a page inside a project
 		if (isset($query_params['name']) && $this->is_a_valid_project($query_params['name'])) {
