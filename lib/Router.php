@@ -47,7 +47,7 @@ class Router
 		foreach (static::$projects as $project) {
 			if ($project_name === $project['name']) {
 				return true;
-			}
+			 }
 		}
 		return false;
 	}
@@ -57,13 +57,13 @@ class Router
 		// this should read in config somewhere
 		$query_params = array();
 
-		if (!count($query_params) < 4) {
+		if (count($params) > 1) {
 			$query_params['name'] = $params[0];
 			$query_params['version'] = $params[1];
 			$query_params['lang'] = $params[2];
 			$query_params['file'] = $params[3];
 		}
-		
+
 		return $query_params;
 	}
 }
