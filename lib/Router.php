@@ -41,7 +41,11 @@ class Router
 		// Finally check if we match a page inside a project
 		if (isset($query_params['name']) && $this->is_a_valid_project($query_params['name'])) {
 			// the project exists lets try and load it using the defined implementation
-			return $this->documentation_loader->load($query_params);
+			$file = $this->documentation_loader->load($query_params);
+
+			if ($file) {
+				return Renderer::load_page($file);
+			}
 		}
 		// redirect to 404 page
 		return FilesystemDocumentationLoader::four_oh_four();	
@@ -68,6 +72,7 @@ class Router
 			$query_params['version'] = $params[1];
 			$query_params['lang'] = $params[2];
 			$query_params['file'] = $params[3];
+
 		}
 
 		return $query_params;

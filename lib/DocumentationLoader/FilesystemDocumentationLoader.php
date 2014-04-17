@@ -16,7 +16,7 @@ class FilesystemDocumentationLoader implements DocumentationLoaderInterface
 	public function load($project_details)
 	{
 		// Load in the file
-		$this->load_markdown_file($project_details);
+		return $this->load_markdown_file($project_details);
 		// Parse it
 		// load up the page with it?
 	}
@@ -29,10 +29,11 @@ class FilesystemDocumentationLoader implements DocumentationLoaderInterface
 		$file = $project_details['file'];
 		
 		if ($file = file_get_contents("../docs/$project/$version/$lang/$file.md")) {
-			echo Markdown::defaultTransform($file);
+			return Markdown::defaultTransform($file);
 		} else {
 			// redirect to a 404
 			self::four_oh_four();
+			return false;
 		}	
 	}
 }
