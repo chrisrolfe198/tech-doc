@@ -4,10 +4,13 @@ use ThatChrisR\TechDocs\Router;
 
 Router::add_routes(
 	array(
-		array(
-			'name' => 'techdocs',
+		'techdocs' => array(
 			'versions' => true,
 			'lang' => array('en', 'de')
+		),
+		'common' => array(
+			'versions' => false,
+			'lang' => false
 		)
 	)
 );

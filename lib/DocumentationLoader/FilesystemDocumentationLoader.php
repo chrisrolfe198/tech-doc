@@ -23,16 +23,14 @@ class FilesystemDocumentationLoader implements DocumentationLoaderInterface
 	
 	protected function load_markdown_file($project_details)
 	{
-		$project = $project_details['name'];
-		$version = $project_details['version'];
-		$lang = $project_details['lang'];
-		$file = $project_details['file'];
+		$project_url = '';
+		foreach ($project_details as $detail) {
+			$project_url .= '/' . $detail;
+		}
 		
-		if ($file = file_get_contents("../docs/$project/$version/$lang/$file.md")) {
+		if ($file = file_get_contents("../docs/$project_url.md")) {
 			return Markdown::defaultTransform($file);
 		} else {
-			// redirect to a 404
-			self::four_oh_four();
 			return false;
 		}	
 	}

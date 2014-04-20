@@ -32,8 +32,9 @@ class Router
 	{
 		// Format the parameters passed in
 		$query_params = $this->format_query_params($query_params);
+
 		// Check if we are on the homepage
-		if (empty($query_params)) {
+		if ($query_params == 'homepage') {
 			// We have no parameters
 			return Renderer::load_homepage();
 		}
@@ -44,7 +45,7 @@ class Router
 			$file = $this->documentation_loader->load($query_params);
 
 			if ($file) {
-				return Renderer::load_page($file);
+				return Renderer::load_page(compact('file'));
 			}
 		}
 		// redirect to 404 page
@@ -53,26 +54,41 @@ class Router
 	
 	private function is_a_valid_project($project_name)
 	{
-		foreach (static::$projects as $project) {
-			// Force both to be lower case
-			if (strtolower($project_name) === strtolower($project['name'])) {
-				return true;
-			 }
+		if (static::$projects[$project_name]) {
+			return true;
 		}
 		return false;
 	}
 	
 	private function format_query_params($params)
 	{
-		// this should read in config somewhere
 		$query_params = array();
+		
+		// If we have no parameters we want the homepage
+		if (empty($params)) return 'homepage';
 
-		if (count($params) > 1) {
-			$query_params['name'] = $params[0];
-			$query_params['version'] = $params[1];
-			$query_params['lang'] = $params[2];
-			$query_params['file'] = $params[3];
+		// Otherwise try and get the project
+		$project = static::$projects[$params[0]];
+		if (!$project) return false;
+		$query_params['name'] = $params[0];
 
+		// Conditionally check the other parameters
+		// TODO: refactor this
+		$i = 1;
+		if ($project['versions']) {
+			$query_params['version'] = $params[$i];	
+			$i++;
+		}
+
+		if ($project['lang']) {
+			$query_params['lang'] = $params[$i];
+			$i++;
+		}
+
+		$query_params['file'] = '';
+
+		for ($i = $i; $i < count($params); $i++ ) {
+			$query_params['file'] .= $params[$i];
 		}
 
 		return $query_params;

@@ -9,10 +9,11 @@ class Renderer
 		echo "<h1>Homepage</h1>";
 	}
 
-	public static function load_page($page)
+	public static function load_page($view_vars)
 	{
-		echo "This should be some form of template loaded in: ";
-		echo $page;
-		echo "This should be a footer";
+		foreach ($view_vars as $key => $val) {
+			$this[$key] = $val;
+		}
+		require '../app/layouts/page.php';
 	}
 }
