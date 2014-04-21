@@ -87,9 +87,10 @@ class Router
 
 		$query_params['file'] = '';
 
-		for ($i = $i; $i < count($params); $i++ ) {
-			$query_params['file'] .= $params[$i];
+		for ($i = $i; $i < (count($params) - 1); $i++ ) {
+			$query_params['file'] .= $params[$i] . '/';
 		}
+		$query_params['file'] .= $params[$i++];
 
 		return $query_params;
 	}
