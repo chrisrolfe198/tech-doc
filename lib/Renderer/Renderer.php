@@ -6,7 +6,7 @@ class Renderer
 {
 	public static function load_homepage()
 	{
-		echo "<h1>Homepage</h1>";
+		self::load_page_with_template('../app/layouts/home.php');
 	}
 
 	public static function load_page($view_vars)
@@ -19,7 +19,12 @@ class Renderer
 
 	public static function four_oh_four()
 	{
-		$this['file'] = file_get_contents('../app/layouts/404.php');
+		self::load_page_with_template('../app/layouts/404.php');
+	}
+
+	private function load_page_with_template($file_url)
+	{
+		$this['file'] = file_get_contents("$file_url");
 		require '../app/layouts/page.php';
 	}
 }
