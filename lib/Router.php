@@ -49,7 +49,7 @@ class Router
 			}
 		}
 		// redirect to 404 page
-		return FilesystemDocumentationLoader::four_oh_four();	
+		return Renderer::four_oh_four();
 	}
 	
 	private function is_a_valid_project($project_name)

@@ -6,13 +6,6 @@ use Michelf\Markdown;
 
 class FilesystemDocumentationLoader implements DocumentationLoaderInterface
 {
-
-	public static function four_oh_four()
-	{
-		$four_oh_four = file_get_contents('../app/layouts/404.md');
-		echo Markdown::defaultTransform($four_oh_four);
-	}
-	
 	public function load($project_details)
 	{
 		// Load in the file
@@ -28,7 +21,8 @@ class FilesystemDocumentationLoader implements DocumentationLoaderInterface
 			$project_url .= '/' . $detail;
 		}
 		
-		if ($file = file_get_contents("../docs/$project_url.md")) {
+		if (file_exists("../docs/$project_url.md")) {
+			$file = file_get_contents("../docs/$project_url.md");
 			return Markdown::defaultTransform($file);
 		} else {
 			return false;

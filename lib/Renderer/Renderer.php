@@ -16,4 +16,10 @@ class Renderer
 		}
 		require '../app/layouts/page.php';
 	}
+
+	public static function four_oh_four()
+	{
+		$this['file'] = file_get_contents('../app/layouts/404.php');
+		require '../app/layouts/page.php';
+	}
 }
