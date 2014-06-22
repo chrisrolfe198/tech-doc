@@ -1,9 +1,18 @@
 <?php
 
 use ThatChrisR\TechDocs\DocumentationLoader\FilesystemDocumentationLoader;
+use ThatChrisR\TechDocs\DirIterator\DirIterator;
 use ThatChrisR\TechDocs\Router;
 
 require '../vendor/autoload.php';
+require '../lib/DirIterator/DirIterator.php';
+
+// $iterator = new DirIterator('../docs/techdocs/');
+try {
+	// $iterator->isDir();
+} catch(Exception $e) {
+	echo $e->getMessage();
+}
 
 // satisfy the dependencies for the router
 $file = new FilesystemDocumentationLoader();

@@ -2,6 +2,8 @@
 
 namespace ThatChrisR\TechDocs\Renderer;
 
+use ThatChrisR\TechDocs\Router;
+
 class Renderer
 {
 	public static function load_homepage()
@@ -11,6 +13,7 @@ class Renderer
 
 	public static function load_page($view_vars)
 	{
+		$nav = Router::build_navigation();
 		foreach ($view_vars as $key => $val) {
 			$this[$key] = $val;
 		}
@@ -24,6 +27,7 @@ class Renderer
 
 	private function load_page_with_template($file_url)
 	{
+		$nav = Router::build_navigation();
 		$this['file'] = file_get_contents("$file_url");
 		require '../app/layouts/page.php';
 	}

@@ -5,6 +5,7 @@ namespace ThatChrisR\TechDocs;
 use ThatChrisR\TechDocs\DocumentationLoader\DocumentationLoaderInterface;
 use ThatChrisR\TechDocs\DocumentationLoader\FilesystemDocumentationLoader;
 use ThatChrisR\TechDocs\Renderer\Renderer;
+use ThatChrisR\TechDocs\DirScan\DirScan;
 
 class Router
 {
@@ -50,6 +51,41 @@ class Router
 		}
 		// redirect to 404 page
 		return Renderer::four_oh_four();
+	}
+
+	public static function build_navigation()
+	{
+		$nav = [];
+		foreach (static::$projects as $project_name => $project) {
+			// techdocs/1.1/en/index
+			$url = '/'.$project_name;
+
+			if ($project['versions']) {
+				$scan = new DirScan('../docs/'.$url);
+
+				$scan = $scan->get_files();
+
+				$highest = 0;
+
+				foreach ($scan as $item) {
+					if ($item > $highest) {
+						$highest = $item;
+					}
+				}
+
+				$url .= '/'.$highest;
+			}
+
+			if ($lang = $project['lang']) {
+				$url .= '/'.$lang[0];
+			}
+
+			$url .= '/index';
+
+			$nav[$project_name] = $url;
+		}
+
+		return $nav;
 	}
 	
 	private function is_a_valid_project($project_name)

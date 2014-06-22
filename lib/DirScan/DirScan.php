@@ -23,26 +23,29 @@ class DirScan
 		// Show every file and dir one level down?
 	}
 
+	public function get_files()
+	{
+		return $this->files;
+	}
+
 	private function scan_dir($dir_string, $url_base = '/')
 	{
-		var_dump($dir_string);
-
 		// Create the empty arrays to populate
-		if (!isset($this->files[$url_base])) $this->files[$url_base] = array();
-		if (!isset($this->folders[$url_base])) $this->folders[$url_base] = array();
+		// if (!isset($this->files[$url_base])) $this->files[$url_base] = array();
+		// if (!isset($this->folders[$url_base])) $this->folders[$url_base] = array();
 
 		// Loop over the directories recursively and build the arrays
 		foreach (new DirectoryIterator($dir_string) as $file) {
 			if ($file->isDot()) continue;
 			if ($file->isDir()) {
-				$dir_name = $file->getFilename();
+				// $dir_name = $file->getFilename();
 
-				array_push($this->folders[$url_base], $dir_name);
-				$this->scan_dir($dir_string . $dir_name . '/', $url_base . $dir_name . '/');
+				// array_push($this->folders[$url_base], $dir_name);
+				// $this->scan_dir($dir_string . $dir_name . '/', $url_base . $dir_name . '/');
 
-				continue;
+				// continue;
 			}
-			array_push($this->files[$url_base], $file->getFilename());
+			array_push($this->files, $file->getFilename());
 		}
 	}
 }

@@ -11,9 +11,9 @@
 		<div class="row">
 			<h1>TechDocs <small>>> A simple flexible documentation system</small></h1>
 			<ul class="nav nav-pills">
-				<li class="active"><a href="">Home</a></li>
-				<li><a href="#">TechDocs</a></li>
-				<li><a href="#">Common</a></li>
+				<?php foreach ($nav as $navitem => $url): ?>
+					<li><a href="<?php echo $url ?>"><?php echo $navitem ?></a></li>
+				<?php endforeach; ?>
 			</ul>
 		</div>
 		<div class="row">
