@@ -5,7 +5,7 @@ use ThatChrisR\TechDocs\DirIterator\DirIterator;
 use ThatChrisR\TechDocs\Router;
 
 require '../vendor/autoload.php';
-require '../lib/DirIterator/DirIterator.php';
+//require '../lib/DirIterator/DirIterator.php';
 
 // $iterator = new DirIterator('../docs/techdocs/');
 try {
