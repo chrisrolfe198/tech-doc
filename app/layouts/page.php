@@ -12,7 +12,7 @@
 			<h1>TechDocs <small>>> A simple flexible documentation system</small></h1>
 			<ul class="nav nav-pills">
 				<?php foreach ($nav as $navitem => $url): ?>
-					<li><a href="<?php echo $url ?>"><?php echo $navitem ?></a></li>
+					<li><a href="<?php echo $url ?>"><?php echo ucfirst($navitem) ?></a></li>
 				<?php endforeach; ?>
 			</ul>
 		</div>
