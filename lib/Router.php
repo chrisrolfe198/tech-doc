@@ -13,6 +13,7 @@ class Router
 	const ROUTES_FILE = '/app/routes.php';
 	
 	protected static $projects;
+	protected static $query_params;
 	
 	public function __construct(DocumentationLoaderInterface $documentation_loader)
 	{
@@ -31,19 +32,19 @@ class Router
 	
 	public function load_route($query_params)
 	{
-		// Format the parameters passed in
-		$query_params = $this->format_query_params($query_params);
+		static::$query_params = $query_params;
+		$this->format_query_params();
 
 		// Check if we are on the homepage
-		if ($query_params == 'homepage') {
+		if (static::$query_params == 'homepage') {
 			// We have no parameters
 			return Renderer::load_homepage();
 		}
 		// Check if we are on a project landing page
 		// Finally check if we match a page inside a project
-		if (isset($query_params['name']) && $this->is_a_valid_project($query_params['name'])) {
+		if (isset(static::$query_params['name']) && $this->is_a_valid_project(static::$query_params['name'])) {
 			// the project exists lets try and load it using the defined implementation
-			$file = $this->documentation_loader->load($query_params);
+			$file = $this->documentation_loader->load(static::$query_params);
 
 			if ($file) {
 				return Renderer::load_page(compact('file'));
@@ -87,6 +88,18 @@ class Router
 
 		return $nav;
 	}
+
+	public static function build_side_navigation()
+	{
+		$project_url = '';
+		foreach (static::$query_params as $key => $detail) {
+			if ($key !== 'file') $project_url .= '/' . $detail;
+		}
+
+		$scan = new DirScan("../docs" . $project_url);
+
+		return $scan->get_files();
+	}
 	
 	private function is_a_valid_project($project_name)
 	{
@@ -96,9 +109,10 @@ class Router
 		return false;
 	}
 	
-	private function format_query_params($params)
+	private function format_query_params()
 	{
-		$query_params = array();
+		$params = static::$query_params;
+		$query_params = [];
 		
 		// If we have no parameters we want the homepage
 		if (empty($params)) return 'homepage';
@@ -128,6 +142,6 @@ class Router
 		}
 		$query_params['file'] .= $params[$i++];
 
-		return $query_params;
+		static::$query_params = $query_params;
 	}
 }

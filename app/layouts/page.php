@@ -19,20 +19,9 @@
 		<div class="row">
 			<div class="col-md-3">
 				<ul class="nav">
-				<li><a class="active" href="#">Part 1</a>
-					<ul class="nav">
-						<li><a href="#">Part 1.1</a></li>
-						<li><a href="#">Part 1.2</a>
-							<ul class="nav">
-								<li><a href="#">Part 1.2.1</a></li>
-								<li><a href="#">Part 1.2.2</a></li>
-								<li><a href="#">Part 1.2.3</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<li><a href="#">Part 2</a></li>
-				<li><a href="#">Part 3</a></li>
+					<?php foreach($left_nav as $navitem): ?>
+						<li><a href="<?php echo substr($navitem, 0, -3); ?>"><?php echo substr($navitem, 0, -3); ?></a></li>
+					<?php endforeach; ?>
 				</ul>
 			</div>
 			<div class="col-md-9">
