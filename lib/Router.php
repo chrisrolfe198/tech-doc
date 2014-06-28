@@ -127,12 +127,12 @@ class Router
 		// Conditionally check the other parameters
 		// TODO: refactor this
 		$i = 1;
-		if ($project['versions']) {
+		if (isset($project['versions'])) {
 			$query_params['version'] = $params[$i];	
 			$i++;
 		}
 
-		if ($project['lang']) {
+		if (isset($project['lang'])) {
 			$query_params['lang'] = $params[$i];
 			$i++;
 		}
