@@ -17,14 +17,18 @@
 			</ul>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
-				<ul class="nav">
-					<?php foreach($left_nav as $navitem): ?>
-						<li><a href="<?php echo substr($navitem, 0, -3); ?>"><?php echo substr($navitem, 0, -3); ?></a></li>
-					<?php endforeach; ?>
-				</ul>
-			</div>
-			<div class="col-md-9">
+			<?php if ($left_nav): ?>
+				<div class="col-md-3">
+					<ul class="nav">
+						<?php foreach($left_nav as $navitem): ?>
+							<li><a href="<?php echo substr($navitem, 0, -3); ?>"><?php echo substr($navitem, 0, -3); ?></a></li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+				<div class="col-md-9">
+			<?php else: ?>
+				<div class="col-md-12">
+			<?php endif; ?>
 				<?php echo $this['file']; ?>
 			</div>
 		</div>
