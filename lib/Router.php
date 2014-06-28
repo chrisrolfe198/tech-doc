@@ -77,7 +77,7 @@ class Router
 				$url .= '/'.$highest;
 			}
 
-			if ($lang = $project['lang']) {
+			if (isset($project['lang']) and $lang = $project['lang']) {
 				$url .= '/'.$lang[0];
 			}
 
@@ -91,6 +91,8 @@ class Router
 
 	public static function build_side_navigation()
 	{
+		if (!is_array(static::$query_params)) return false;
+		
 		$project_url = '';
 		foreach (static::$query_params as $key => $detail) {
 			if ($key !== 'file') $project_url .= '/' . $detail;
@@ -115,7 +117,7 @@ class Router
 		$query_params = [];
 		
 		// If we have no parameters we want the homepage
-		if (empty($params)) return 'homepage';
+		if (empty($params)) return static::$query_params = 'homepage';
 
 		// Otherwise try and get the project
 		$project = static::$projects[$params[0]];
