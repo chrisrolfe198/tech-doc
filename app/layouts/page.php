@@ -21,7 +21,11 @@
 				<div class="col-md-3">
 					<ul class="nav">
 						<?php foreach($left_nav as $navitem): ?>
-							<li><a href="<?php echo substr($navitem, 0, -3); ?>"><?php echo substr($navitem, 0, -3); ?></a></li>
+							<?php if (substr($navitem, -3) == '.md'): ?>
+								<li><a href="<?php echo substr($navitem, 0, -3); ?>"><?php echo substr($navitem, 0, -3); ?></a></li>
+							<?php else: ?>
+								<li><a href="<?php echo $navitem.'/index'; ?>"><?php echo $navitem; ?></a></li>
+							<?php endif; ?>
 						<?php endforeach; ?>
 					</ul>
 				</div>
