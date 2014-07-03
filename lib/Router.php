@@ -95,10 +95,12 @@ class Router
 		
 		$project_url = '';
 		foreach (static::$query_params as $key => $detail) {
-			if ($key !== 'file') $project_url .= '/' . $detail;
+			$project_url .= '/' . $detail;
 		}
 
-		$scan = new DirScan("../docs" . $project_url);
+		preg_match("/(.*)\/.*$/", $project_url, $regex);
+
+		$scan = new DirScan("../docs" . $regex[1]);
 
 		return $scan->get_files();
 	}
@@ -115,7 +117,7 @@ class Router
 	{
 		$params = static::$query_params;
 		$query_params = [];
-		
+
 		// If we have no parameters we want the homepage
 		if (empty($params)) return static::$query_params = 'homepage';
 
