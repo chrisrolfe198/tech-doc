@@ -9,7 +9,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<h1>TechDocs <small>>> A simple flexible documentation system</small></h1>
+			<h1><?php echo $config->get('name'); ?> <small>>> <?php echo $config->get('description'); ?></small></h1>
 			<ul class="nav nav-pills">
 				<?php foreach ($nav as $navitem => $url): ?>
 					<li><a href="<?php echo $url ?>"><?php echo ucfirst($navitem) ?></a></li>

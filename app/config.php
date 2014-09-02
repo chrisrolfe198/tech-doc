@@ -1,4 +1,6 @@
 <?php
 
-$documentationName = 'Tech Docs';
-$documentationSlogan = 'A simple documentation system built with PHP';
+return [
+    "name" => 'Tech Docs',
+    "description" => 'A simple documentation system built with PHP'
+];
