@@ -17,16 +17,21 @@
 			</ul>
 		</div>
 		<div class="row">
-			<?php if ($left_nav): ?>
+			<?php if ($dir): ?>
 				<div class="col-md-3">
 					<ul class="nav">
-						<?php foreach($left_nav as $navitem): ?>
-							<?php if (substr($navitem, -3) == '.md'): ?>
-								<li><a href="<?php echo substr($navitem, 0, -3); ?>"><?php echo substr($navitem, 0, -3); ?></a></li>
-							<?php else: ?>
-								<li><a href="<?php echo $navitem.'/index'; ?>"><?php echo $navitem; ?></a></li>
-							<?php endif; ?>
-						<?php endforeach; ?>
+						<li><a href="../"><i class="glyphicon glyphicon-folder-open"></i> Up a level</a></li>
+						<?php foreach ($dir as $type => $left_nav) : ?>
+							<?php foreach($left_nav as $navitem): ?>
+								<li>
+									<?php if ($type == "folders") : ?>
+										<a href="<?php echo $navitem . '/index'; ?>"><i class="glyphicon glyphicon-folder-open"></i> <?php echo $navitem; ?></a>
+									<?php else : ?>
+										<a href="<?php echo $navitem; ?>"><?php echo $navitem; ?></a>
+									<?php endif ?>
+								</li>
+							<?php endforeach; ?>
+						<?php endforeach ?>
 					</ul>
 				</div>
 				<div class="col-md-9">

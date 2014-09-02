@@ -9,27 +9,27 @@ use ThatChrisR\TechDocs\DirScan\DirScan;
 
 class Router
 {
-	
+
 	const ROUTES_FILE = '/app/routes.php';
-	
+
 	protected static $projects;
 	protected static $query_params;
-	
+
 	public function __construct(DocumentationLoaderInterface $documentation_loader)
 	{
 		$this->documentation_loader = $documentation_loader;
 	}
-	
+
 	public static function add_routes(array $projects)
 	{
 		// checks if there are existing routes to allow multiple routes files
 		if (is_array(static::$projects)) {
 			$projects = array_merge($projects, static::$projects);
 		}
-		
+
 		static::$projects = $projects;
 	}
-	
+
 	public function load_route($query_params)
 	{
 		static::$query_params = $query_params;
@@ -64,7 +64,7 @@ class Router
 			if ($project['versions']) {
 				$scan = new DirScan('../docs/'.$url);
 
-				$scan = $scan->get_files();
+				$scan = $scan->get_folders();
 
 				$highest = 0;
 
@@ -92,7 +92,7 @@ class Router
 	public static function build_side_navigation()
 	{
 		if (!is_array(static::$query_params)) return false;
-		
+
 		$project_url = '';
 		foreach (static::$query_params as $key => $detail) {
 			$project_url .= '/' . $detail;
@@ -102,9 +102,12 @@ class Router
 
 		$scan = new DirScan("../docs" . $regex[1]);
 
-		return $scan->get_files();
+		return [
+			"folders" => $scan->get_folders(),
+			"files" => $scan->get_files()
+		];
 	}
-	
+
 	private function is_a_valid_project($project_name)
 	{
 		if (static::$projects[$project_name]) {
@@ -112,7 +115,7 @@ class Router
 		}
 		return false;
 	}
-	
+
 	private function format_query_params()
 	{
 		$params = static::$query_params;
@@ -130,7 +133,7 @@ class Router
 		// TODO: refactor this
 		$i = 1;
 		if (isset($project['versions'])) {
-			$query_params['version'] = $params[$i];	
+			$query_params['version'] = $params[$i];
 			$i++;
 		}
 

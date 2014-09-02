@@ -13,7 +13,7 @@ class DirScan
 	public function __construct($dir)
 	{
 		$this->dir = $dir;
-		$this->scan_dir($dir);	
+		$this->scan_dir($dir);
 	}
 	public function map_position()
 	{
@@ -28,6 +28,11 @@ class DirScan
 		return $this->files;
 	}
 
+	public function get_folders()
+	{
+		return $this->folders;
+	}
+
 	private function scan_dir($dir_string, $url_base = '/')
 	{
 		// Create the empty arrays to populate
@@ -38,14 +43,10 @@ class DirScan
 		foreach (new DirectoryIterator($dir_string) as $file) {
 			if ($file->isDot()) continue;
 			if ($file->isDir()) {
-				// $dir_name = $file->getFilename();
-
-				// array_push($this->folders[$url_base], $dir_name);
-				// $this->scan_dir($dir_string . $dir_name . '/', $url_base . $dir_name . '/');
-
-				// continue;
+				array_push($this->folders, $file->getFilename());
+				continue;
 			}
-			array_push($this->files, $file->getFilename());
+			array_push($this->files, substr($file->getFilename(), 0, -3));
 		}
 	}
 }

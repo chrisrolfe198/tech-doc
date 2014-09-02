@@ -16,7 +16,7 @@ class Renderer
 	{
 		$config = new Config;
 		$nav = Router::build_navigation();
-		$left_nav = Router::build_side_navigation();
+		$dir = Router::build_side_navigation();
 		foreach ($view_vars as $key => $val) {
 			$this[$key] = $val;
 		}
@@ -32,7 +32,7 @@ class Renderer
 	{
 		$config = new Config;
 		$nav = Router::build_navigation();
-		$left_nav = Router::build_side_navigation();
+		$dir = Router::build_side_navigation();
 		$this['file'] = file_get_contents("$file_url");
 		require '../app/layouts/page.php';
 	}
