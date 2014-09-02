@@ -27,7 +27,7 @@
 									<?php if ($type == "folders") : ?>
 										<a href="<?php echo $navitem . '/index'; ?>"><i class="glyphicon glyphicon-folder-open"></i> <?php echo $navitem; ?></a>
 									<?php else : ?>
-										<a href="<?php echo $navitem; ?>"><?php echo $navitem; ?></a>
+										<a href="<?php echo $navitem; ?>"><i class="glyphicon glyphicon-file"></i> <?php echo $navitem; ?></a>
 									<?php endif ?>
 								</li>
 							<?php endforeach; ?>
