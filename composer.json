@@ -15,6 +15,6 @@
 		"files" : ["app/config.php", "app/Routes.php"]
 	},
     "require": {
-			"michelf/php-markdown": "1.4.*@dev"
+			"erusev/parsedown": "~1.1"
     }
 }

@@ -2,7 +2,7 @@
 
 namespace ThatChrisR\TechDocs\DocumentationLoader;
 
-use Michelf\Markdown;
+use \Parsedown;
 
 class FilesystemDocumentationLoader implements DocumentationLoaderInterface
 {
@@ -35,7 +35,8 @@ class FilesystemDocumentationLoader implements DocumentationLoaderInterface
 
 		if (file_exists("../docs/$project_url.md")) {
 			$file = file_get_contents("../docs/$project_url.md");
-			return Markdown::defaultTransform($file);
+			$parser = new Parsedown();
+			return $parser->text($file);
 		} else {
 			return false;
 		}	
